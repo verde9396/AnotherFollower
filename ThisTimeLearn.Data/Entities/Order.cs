@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ThisTimeLearn.Data.Entities;
 
 namespace ThisTimeLearn.Data.EF
 {
@@ -15,8 +16,9 @@ namespace ThisTimeLearn.Data.EF
         public OrderStatus Status { set; get; }
 
         public List<OrderDetail> OrderDetails { get; set; }
+        public AppUser   AppUser { get; set; }
 
-       
+
     }
 
     public enum OrderStatus

@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Transactions;
 using ThisTimeLearn.Data.Configurations;
 using ThisTimeLearn.Data.Entities;
+using ThisTimeLearn.Data.Extension;
 
 namespace ThisTimeLearn.Data.EF
 {
-  public  class EShopDbContext : DbContext
+  public  class EShopDbContext : IdentityDbContext<AppUser,AppRole,Guid>
     {
         public EShopDbContext(DbContextOptions options) : base(options)
         {
@@ -32,7 +32,18 @@ namespace ThisTimeLearn.Data.EF
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
 
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new SlideConfiguration());
+
+            modelBuilder.Seed();
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUsersClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x=> new {x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x=>x.UserId);
+
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -55,7 +66,7 @@ namespace ThisTimeLearn.Data.EF
 
         public DbSet<Promotion> Promotions { get; set; }
 
-       public DbSet<Entities.Transaction> Transactions { get; set; }
+       public DbSet<Transaction> Transactions { get; set; }
 
         public DbSet<ProductImage> ProductImages { get; set; }
 

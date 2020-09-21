@@ -7,9 +7,16 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200921122022_Initial.cs" />
     <Compile Remove="Migrations\20200921122022_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200921133445_SeedDataIdentityDatabase.cs" />
+    <Compile Remove="Migrations\20200921133445_SeedDataIdentityDatabase.Designer.cs" />
+    <Compile Remove="Migrations\20200921140745_SeedIdentityDatabase.cs" />
+    <Compile Remove="Migrations\20200921140745_SeedIdentityDatabase.Designer.cs" />
+    <Compile Remove="Migrations\20200921140950_SeedIdentityUser.cs" />
+    <Compile Remove="Migrations\20200921140950_SeedIdentityUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>
@@ -20,10 +27,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
